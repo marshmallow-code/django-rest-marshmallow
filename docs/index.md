@@ -33,7 +33,9 @@ Install using `pip`...
 $ pip install django-rest-marshmallow
 ```
 
-## Example
+---
+
+## Usage
 
 Define your schemas as you would with marshmallow, but importing the `Schema` class from `rest_marshmallow` instead.
 
@@ -59,7 +61,7 @@ Or for validation...
     serializer.is_valid(raise_exception=True)
     serializer.validated_data
 
-### Instance create and update
+#### Instance create and update
 
 If you want to support `serializer.save()` you'll need to define the `.create()` and/or `.update()` methods explicitly.
 
@@ -84,13 +86,9 @@ You can now use `.save()` from your view code…
     serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
----
-
 You should use these methods instead of overriding the `make_object()` marshmallow method.
 
----
-
-### Nested representations
+#### Nested representations
 
 For nested representations, use marshmallow's standard `Nested` field as usual.
 
@@ -104,12 +102,14 @@ For nested representations, use marshmallow's standard `Nested` field as usual.
         release_date = fields.Date()
         artist = fields.Nested(ArtistSchema)
 
-### Excluding fields
+#### Excluding fields
 
 The marshmallow `only` and `exclude` arguments are also valid as serializer arguments:
 
     serializer = CustomerSerializer(queryset, many=True, only=('name', 'email'))
     return Response(serializer.data)
+
+---
 
 ## Testing
 
