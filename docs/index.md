@@ -15,6 +15,10 @@
 
 ---
 
+## Overview
+
+`django-rest-marshmallow` provides an alternative serializer implementation to the built-in serializers, by using the python [marshmallow] library, but exposing the same API as REST framework's `Serializer` class.
+
 ## Requirements
 
 * Python (2.7, 3.3+)
@@ -32,8 +36,6 @@ $ pip install django-rest-marshmallow
 ---
 
 ## Usage
-
-`django-rest-marshmallow` provides an alternative serializer implementation to the built-in serializers, by using the python [marshmallow] library, but exposing the same API as REST framework's `Serializer` class.
 
 Define your schemas as you would with marshmallow, but importing the `Schema` class from `rest_marshmallow` instead.
 
