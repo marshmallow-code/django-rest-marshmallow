@@ -48,16 +48,18 @@ Define your schemas as you would with marshmallow, but importing the `Schema` cl
 
 The Schema class has the same interface as a Django REST framework serializer, so you can use it in your generic views...
 
-    serializer_class = CustomerSerializer
+    class CustomerListView(generics.ListAPIView):
+        queryset = Customer.objects.all()
+        serializer_class = CustomerSchema
 
 Or use the serializer API directly, for either serialization...
 
-    serializer = CustomerSerializer(queryset, many=True)
+    serializer = CustomerSchema(queryset, many=True)
     return Response(serializer.data)
 
 Or for validation...
 
-    serializer = CustomerSerializer(data=request.data)
+    serializer = CustomerSchema(data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.validated_data
 
@@ -81,12 +83,18 @@ If you want to support `serializer.save()` you'll need to define the `.create()`
 
 You can now use `.save()` from your view code…
 
-    serializer = CustomerSerializer(data=request.data)
+    serializer = CustomerSchema(data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-You should use these methods instead of overriding the `make_object()` marshmallow method.
+Or use the schema together with generic views that create or update instances...
+
+    class CustomerListView(generics.ListCreateAPIView):
+        queryset = Customer.objects.all()
+        serializer_class = CustomerSchema
+
+Note that you should always use the `create()` and `update()` methods instead of overriding the `make_object()` marshmallow method.
 
 #### Nested representations
 
@@ -106,7 +114,7 @@ For nested representations, use marshmallow's standard `Nested` field as usual.
 
 The marshmallow `only` and `exclude` arguments are also valid as serializer arguments:
 
-    serializer = CustomerSerializer(queryset, many=True, only=('name', 'email'))
+    serializer = CustomerSchema(queryset, many=True, only=('name', 'email'))
     return Response(serializer.data)
 
 ---
