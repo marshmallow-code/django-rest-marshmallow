@@ -79,6 +79,8 @@
     
         <li class="main active"><a href="#django-rest-marshmallow">django-rest-marshmallow</a></li>
         
+            <li><a href="#overview">Overview</a></li>
+        
             <li><a href="#requirements">Requirements</a></li>
         
             <li><a href="#installation">Installation</a></li>
@@ -107,6 +109,8 @@
 <h1 id="django-rest-marshmallow"><a href="http://tomchristie.github.io/django-rest-marshmallow">django-rest-marshmallow</a></h1>
 <p><a href="https://marshmallow.readthedocs.org/en/latest/">Marshmallow schemas</a> for Django REST framework.</p>
 <hr />
+<h2 id="overview">Overview</h2>
+<p><code>django-rest-marshmallow</code> provides an alternative serializer implementation to the built-in serializers, by using the python <a href="https://marshmallow.readthedocs.org/en/latest/">marshmallow</a> library, but exposing the same API as REST framework's <code>Serializer</code> class.</p>
 <h2 id="requirements">Requirements</h2>
 <ul>
 <li>Python (2.7, 3.3+)</li>
@@ -120,7 +124,6 @@
 
 <hr />
 <h2 id="usage">Usage</h2>
-<p><code>django-rest-marshmallow</code> provides an alternative serializer implementation to the built-in serializers, by using the python <a href="https://marshmallow.readthedocs.org/en/latest/">marshmallow</a> library, but exposing the same API as REST framework's <code>Serializer</code> class.</p>
 <p>Define your schemas as you would with marshmallow, but importing the <code>Schema</code> class from <code>rest_marshmallow</code> instead.</p>
 <pre><code>from rest_marshmallow import Schema, fields
 
