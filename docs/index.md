@@ -11,13 +11,9 @@
 
 # [django-rest-marshmallow](http://tomchristie.github.io/django-rest-marshmallow)
 
-Marshmallow schemas for Django REST framework
+[Marshmallow schemas][marshmallow] for Django REST framework.
 
 ---
-
-## Overview
-
-Marshmallow schemas for Django REST framework
 
 ## Requirements
 
@@ -36,6 +32,8 @@ $ pip install django-rest-marshmallow
 ---
 
 ## Usage
+
+`django-rest-marshmallow` provides an alternative serializer implementation to the built-in serializers, by using the python [marshmallow] library, but exposing the same API as REST framework's `Serializer` class.
 
 Define your schemas as you would with marshmallow, but importing the `Schema` class from `rest_marshmallow` instead.
 
@@ -151,3 +149,6 @@ To build the documentation:
 ```bash
 $ mkdocs build
 ```
+
+
+[marshmallow]: https://marshmallow.readthedocs.org/en/latest/
