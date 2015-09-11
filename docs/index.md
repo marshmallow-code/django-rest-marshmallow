@@ -9,7 +9,7 @@
 
 ---
 
-# [django-rest-marshmallow](http://tomchristie.github.io/django-rest-marshmallow)
+# django-rest-marshmallow
 
 [Marshmallow schemas][marshmallow] for Django REST framework.
 
