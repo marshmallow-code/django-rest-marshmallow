@@ -1,0 +1,4 @@
+site_name: django-rest-marshmallow
+site_description: Marshmallow schemas for Django REST framework
+repo_url: https://github.com/tomchristie/django-rest-marshmallow
+site_dir: html
