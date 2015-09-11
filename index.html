@@ -133,14 +133,16 @@ class CustomerSchema(Schema):
     created_at = fields.DateTime()
 </code></pre>
 <p>The Schema class has the same interface as a Django REST framework serializer, so you can use it in your generic views...</p>
-<pre><code>serializer_class = CustomerSerializer
+<pre><code>class CustomerListView(generics.ListAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSchema
 </code></pre>
 <p>Or use the serializer API directly, for either serialization...</p>
-<pre><code>serializer = CustomerSerializer(queryset, many=True)
+<pre><code>serializer = CustomerSchema(queryset, many=True)
 return Response(serializer.data)
 </code></pre>
 <p>Or for validation...</p>
-<pre><code>serializer = CustomerSerializer(data=request.data)
+<pre><code>serializer = CustomerSchema(data=request.data)
 serializer.is_valid(raise_exception=True)
 serializer.validated_data
 </code></pre>
@@ -161,12 +163,17 @@ serializer.validated_data
         return instance
 </code></pre>
 <p>You can now use <code>.save()</code> from your view code…</p>
-<pre><code>serializer = CustomerSerializer(data=request.data)
+<pre><code>serializer = CustomerSchema(data=request.data)
 serializer.is_valid(raise_exception=True)
 serializer.save()
 return Response(serializer.data, status=status.HTTP_201_CREATED)
 </code></pre>
-<p>You should use these methods instead of overriding the <code>make_object()</code> marshmallow method.</p>
+<p>Or use the schema together with generic views that create or update instances...</p>
+<pre><code>class CustomerListView(generics.ListCreateAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSchema
+</code></pre>
+<p>Note that you should always use the <code>create()</code> and <code>update()</code> methods instead of overriding the <code>make_object()</code> marshmallow method.</p>
 <h4 id="nested-representations">Nested representations</h4>
 <p>For nested representations, use marshmallow's standard <code>Nested</code> field as usual.</p>
 <pre><code>from rest_marshmallow import fields, Schema
@@ -181,7 +188,7 @@ class AlbumSchema(Schema):
 </code></pre>
 <h4 id="excluding-fields">Excluding fields</h4>
 <p>The marshmallow <code>only</code> and <code>exclude</code> arguments are also valid as serializer arguments:</p>
-<pre><code>serializer = CustomerSerializer(queryset, many=True, only=('name', 'email'))
+<pre><code>serializer = CustomerSchema(queryset, many=True, only=('name', 'email'))
 return Response(serializer.data)
 </code></pre>
 <hr />
