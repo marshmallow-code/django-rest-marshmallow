@@ -21,8 +21,9 @@ Marshmallow schemas for Django REST framework
 
 ## Requirements
 
-* Python (2.7, 3.3, 3.4)
-* Django (1.6, 1.7)
+* Python (2.7, 3.3+)
+* Django REST framework (3.0+)
+* Marshmallow (1.2+, 2.0+)
 
 ## Installation
 
@@ -34,7 +35,81 @@ $ pip install django-rest-marshmallow
 
 ## Example
 
-TODO: Write example.
+Define your schemas as you would with marshmallow, but importing the `Schema` class from `rest_marshmallow` instead.
+
+    from rest_marshmallow import Schema, fields
+
+    class CustomerSchema(Schema):
+        name = fields.String()
+        email = fields.Email()
+        created_at = fields.DateTime()
+
+The Schema class has the same interface as a Django REST framework serializer, so you can use it in your generic views...
+
+    serializer_class = CustomerSerializer
+
+Or use the serializer API directly, for either serialization...
+
+    serializer = CustomerSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+Or for validation...
+
+    serializer = CustomerSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.validated_data
+
+### Instance create and update
+
+If you want to support `serializer.save()` you'll need to define the `.create()` and/or `.update()` methods explicitly.
+
+    class CustomerSchema(Schema):
+        name = fields.String()
+        email = fields.Email()
+        created_at = fields.DateTime()
+
+        def create(self, validated_data):
+            return Customer.objects.create(**validated_data)
+
+        def update(self, instance, validated_data):
+            for key, value in validated_data.items():
+                setattr(instance, key, value)
+            instance.save()
+            return instance
+
+You can now use `.save()` from your view code…
+
+    serializer = CustomerSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+---
+
+You should use these methods instead of overriding the `make_object()` marshmallow method.
+
+---
+
+### Nested representations
+
+For nested representations, use marshmallow's standard `Nested` field as usual.
+
+    from rest_marshmallow import fields, Schema
+
+    class ArtistSchema(Schema):
+        name = fields.String()
+
+    class AlbumSchema(Schema):
+        title = fields.String()
+        release_date = fields.Date()
+        artist = fields.Nested(ArtistSchema)
+
+### Excluding fields
+
+The marshmallow `only` and `exclude` arguments are also valid as serializer arguments:
+
+    serializer = CustomerSerializer(queryset, many=True, only=('name', 'email'))
+    return Response(serializer.data)
 
 ## Testing
 
