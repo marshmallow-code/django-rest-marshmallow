@@ -1,6 +1,11 @@
 from rest_marshmallow import Schema, fields
 
 
+import marshmallow
+
+IS_MARSHMALLOW_1 = marshmallow.__version__.split('.')[0] == '1'
+
+
 class Object(object):
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
@@ -64,8 +69,13 @@ def test_deserialize_validation_failed():
     data = {'number': 'abc', 'text': 'abc'}
     serializer = ExampleSerializer(data=data)
     assert not serializer.is_valid()
+    if IS_MARSHMALLOW_1:
+        expected_error = "invalid literal for int() with base 10: 'abc'"
+    else:
+        expected_error = 'Not a valid integer.'
+
     assert serializer.errors == {
-        'number': ["invalid literal for int() with base 10: 'abc'"]
+        'number': [expected_error]
     }
 
 
