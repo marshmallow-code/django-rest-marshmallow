@@ -53,9 +53,11 @@ version = get_version(package)
 
 
 if sys.argv[-1] == 'publish':
-    if os.system("pip freeze | grep wheel"):
+    try:
+        __import__('wheel')
+    except ImportError:
         print("wheel not installed.\nUse `pip install wheel`.\nExiting.")
-        sys.exit()
+        sys.exit(1)
     os.system("python setup.py sdist upload")
     os.system("python setup.py bdist_wheel upload")
     print("You probably want to also tag the version now:")
