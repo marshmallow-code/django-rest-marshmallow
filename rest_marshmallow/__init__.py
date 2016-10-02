@@ -5,7 +5,7 @@ from marshmallow import Schema as MarshmallowSchema
 from marshmallow import fields  # noqa
 
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 MARSHMALLOW_VERSION = int(marshmallow.__version__.split('.')[0])
 
