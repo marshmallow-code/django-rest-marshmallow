@@ -160,5 +160,15 @@ To build the documentation:
 $ mkdocs build
 ```
 
+## Changelog
+
+### 1.0.1 (2016-10-02)
+
+* Fix bug that raised a ``TypeError`` on serialization ([#6](https://github.com/tomchristie/django-rest-marshmallow/issues/6)).
+
+### 1.0.0 (2015-09-11)
+
+* First release.
+
 
 [marshmallow]: https://marshmallow.readthedocs.org/en/latest/
