@@ -1,13 +1,9 @@
 from rest_framework.serializers import BaseSerializer, ValidationError
 
-import marshmallow
 from marshmallow import Schema as MarshmallowSchema
 from marshmallow import fields  # noqa
 
-
 __version__ = '1.0.1'
-
-MARSHMALLOW_VERSION = int(marshmallow.__version__.split('.')[0])
 
 _schema_kwargs = (
     'only', 'exclude'
@@ -67,6 +63,4 @@ class Schema(BaseSerializer, MarshmallowSchema):
     def context(self, value):
         self._context = value
 
-    if MARSHMALLOW_VERSION >= 2:
-        # Ensure that marshmallow's get_attribute is used rather than DRF's
-        get_attribute = MarshmallowSchema.get_attribute
+    get_attribute = MarshmallowSchema.get_attribute
