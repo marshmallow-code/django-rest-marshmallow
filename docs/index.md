@@ -23,7 +23,7 @@
 
 * Python (2.7, 3.3+)
 * Django REST framework (3.0+)
-* Marshmallow (1.2+, 2.0+)
+* Marshmallow (2.0+)
 
 ## Installation
 
@@ -161,6 +161,10 @@ $ mkdocs build
 ```
 
 ## Changelog
+
+### 2.0.0 (unreleased)
+
+* Drop support for marshmallow 1.x. Only marshmallow>=2.0.0 is supported.
 
 ### 1.0.1 (2016-10-02)
 
