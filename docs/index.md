@@ -165,6 +165,8 @@ $ mkdocs build
 ### 2.0.0 (unreleased)
 
 * Drop support for marshmallow 1.x. Only marshmallow>=2.0.0 is supported.
+* Officially support Python 3.4 and 3.5.
+* Drop support for Python 3.3 (which is no longer supported by Django).
 
 ### 1.0.1 (2016-10-02)
 
