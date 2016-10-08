@@ -10,20 +10,13 @@ env:
     - TOX_ENV=py27-flake8
     - TOX_ENV=py27-docs
     - TOX_ENV=py27-drf3.0
-    - TOX_ENV=py27-drf3.1
-    - TOX_ENV=py27-drf3.2
-    # py33
-    - TOX_ENV=py33-drf3.0
-    - TOX_ENV=py33-drf3.1
-    - TOX_ENV=py33-drf3.2
+    - TOX_ENV=py27-drf3.4
     # py34
     - TOX_ENV=py34-drf3.0
-    - TOX_ENV=py34-drf3.1
-    - TOX_ENV=py34-drf3.2
+    - TOX_ENV=py34-drf3.4
     # py35
     - TOX_ENV=py35-drf3.0
-    - TOX_ENV=py35-drf3.1
-    - TOX_ENV=py35-drf3.2
+    - TOX_ENV=py35-drf3.4
 
 
 matrix:
