@@ -12,9 +12,6 @@ PYTEST_ARGS = {
     'fast': ['tests', '-q'],
 }
 
-FLAKE8_ARGS = ['rest_marshmallow', 'tests', '--ignore=E501']
-
-
 sys.path.append(os.path.dirname(__file__))
 
 
@@ -23,9 +20,9 @@ def exit_on_failure(ret, message=None):
         sys.exit(ret)
 
 
-def flake8_main(args):
+def flake8_main():
     print('Running flake8 code linting')
-    ret = subprocess.call(['flake8'] + args)
+    ret = subprocess.call('flake8')
     print('flake8 failed' if ret else 'flake8 passed')
     return ret
 
@@ -88,4 +85,4 @@ if __name__ == "__main__":
     if run_tests:
         exit_on_failure(pytest.main(pytest_args))
     if run_flake8:
-        exit_on_failure(flake8_main(FLAKE8_ARGS))
+        exit_on_failure(flake8_main())
