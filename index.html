@@ -117,7 +117,7 @@
 <ul>
 <li>Python (2.7, 3.3+)</li>
 <li>Django REST framework (3.0+)</li>
-<li>Marshmallow (1.2+, 2.0+)</li>
+<li>Marshmallow (2.0+)</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <p>Install using <code>pip</code>...</p>
@@ -222,6 +222,12 @@ Running at: http://127.0.0.1:8000/
 </code></pre>
 
 <h2 id="changelog">Changelog</h2>
+<h3 id="200-2016-10-09">2.0.0 (2016-10-09)</h3>
+<ul>
+<li>Drop support for marshmallow 1.x. Only marshmallow&gt;=2.0.0 is supported.</li>
+<li>Officially support Python 3.4 and 3.5.</li>
+<li>Drop support for Python 3.3 (which is no longer supported by Django).</li>
+</ul>
 <h3 id="101-2016-10-02">1.0.1 (2016-10-02)</h3>
 <ul>
 <li>Fix bug that raised a <code>TypeError</code> on serialization (<a href="https://github.com/tomchristie/django-rest-marshmallow/issues/6">#6</a>).</li>
