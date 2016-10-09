@@ -12,6 +12,8 @@ description = 'Marshmallow schemas for Django REST framework'
 url = 'https://github.com/tomchristie/django-rest-marshmallow'
 author = 'Tom Christie'
 author_email = 'tom@tomchristie.com'
+maintainer = 'Steven Loria'
+maintainer_email = 'sloria1@gmail.com'
 license = 'BSD'
 
 
@@ -74,11 +76,13 @@ setup(
     description=description,
     author=author,
     author_email=author_email,
+    maintainer=maintainer,
+    maintainer_email=maintainer_email,
     packages=get_packages(package),
     package_data=get_package_data(package),
     install_requires=[],
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',

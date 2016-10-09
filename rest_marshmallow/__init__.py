@@ -3,7 +3,7 @@ from rest_framework.serializers import BaseSerializer, ValidationError
 from marshmallow import Schema as MarshmallowSchema
 from marshmallow import fields  # noqa
 
-__version__ = '1.0.1'
+__version__ = '2.0.0'
 
 _schema_kwargs = (
     'only', 'exclude'

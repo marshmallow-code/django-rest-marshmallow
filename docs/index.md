@@ -162,7 +162,7 @@ $ mkdocs build
 
 ## Changelog
 
-### 2.0.0 (unreleased)
+### 2.0.0 (2016-10-09)
 
 * Drop support for marshmallow 1.x. Only marshmallow>=2.0.0 is supported.
 * Officially support Python 3.4 and 3.5.
