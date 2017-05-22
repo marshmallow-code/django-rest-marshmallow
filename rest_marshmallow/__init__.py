@@ -6,7 +6,7 @@ from marshmallow import fields  # noqa
 __version__ = '2.0.0'
 
 _schema_kwargs = (
-    'only', 'exclude'
+    'only', 'exclude', 'dump_only', 'load_only'
 )
 
 
