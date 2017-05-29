@@ -1,32 +1,23 @@
 language: python
 
 python:
-    - "3.6"
+  - "3.6"
+  - "3.5"
+  - "3.4"
+  - "2.7"
 
 sudo: false
 
 env:
-    # py27
-    - TOX_ENV=py27-flake8
-    - TOX_ENV=py27-docs
-    - TOX_ENV=py27-drf3.0
-    - TOX_ENV=py27-drf3.4
-    # py34
-    - TOX_ENV=py34-drf3.0
-    - TOX_ENV=py34-drf3.4
-    # py35
-    - TOX_ENV=py35-drf3.0
-    - TOX_ENV=py35-drf3.4
-    # py36
-    - TOX_ENV=py36-drf3.0
-    - TOX_ENV=py36-drf3.4
-
+  matrix:
+    - DRF=3.0
+    - DRF=3.4
 
 matrix:
   fast_finish: true
 
 install:
-  - pip install tox
+  - travis_retry pip install -U virtualenv tox tox-travis
 
 script:
-    - tox -e $TOX_ENV
+    - tox
