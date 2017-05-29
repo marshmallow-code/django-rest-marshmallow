@@ -162,6 +162,12 @@ $ mkdocs build
 
 ## Changelog
 
+### 3.0.0 (2017-05-29)
+
+* Officially support Python 3.6.
+* Fix error thrown when using a `Nested` field ([#12](https://github.com/tomchristie/django-rest-marshmallow/issues/12)). Thanks [@devashishsharma2302](https://github.com/devashishsharma2302) for the fix.
+* Drop support for Django<1.10 and DRF<3.4.
+
 ### 2.0.0 (2016-10-09)
 
 * Drop support for marshmallow 1.x. Only marshmallow>=2.0.0 is supported.
@@ -175,6 +181,5 @@ $ mkdocs build
 ### 1.0.0 (2015-09-11)
 
 * First release.
-
 
 [marshmallow]: https://marshmallow.readthedocs.org/en/latest/
