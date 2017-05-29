@@ -21,7 +21,7 @@
 
 ## Requirements
 
-* Python (2.7, 3.3+)
+* Python (2.7, 3.4+)
 * Django REST framework (3.0+)
 * Marshmallow (2.0+)
 
