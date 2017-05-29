@@ -22,7 +22,7 @@
 ## Requirements
 
 * Python (2.7, 3.3+)
-* Django REST framework (3.0+)
+* Django REST framework (3.4+)
 * Marshmallow (2.0+)
 
 ## Installation
