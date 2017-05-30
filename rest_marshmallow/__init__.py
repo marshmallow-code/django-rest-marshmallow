@@ -1,6 +1,7 @@
 from rest_framework.serializers import BaseSerializer, ValidationError
 
 from marshmallow import Schema as MarshmallowSchema
+from marshmallow.utils import _Missing
 from marshmallow import fields  # noqa
 
 __version__ = '3.0.0'
@@ -31,6 +32,23 @@ class Schema(BaseSerializer, MarshmallowSchema):
         if ret.errors:
             raise ValidationError(ret.errors)
         return ret.data
+
+    def get_fields(self):
+        """
+        Returns a dictionary of {field_name: field_instance}.
+        Mapping certain marshmellow attributes to what their django
+        counterparts are so as to not break things
+        """        
+        fields = {}
+        for name, field in self.__class__._declared_fields.items():
+            if field.dump_only:
+                field.read_only = True
+            if field.load_only:
+                field.write_only = True
+            if isinstance(field, _Missing):
+                field.default = None
+            fields[name] = field
+        return fields
 
     @property
     def data(self):
