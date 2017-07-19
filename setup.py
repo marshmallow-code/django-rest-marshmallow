@@ -9,7 +9,7 @@ from setuptools import setup
 name = 'django-rest-marshmallow'
 package = 'rest_marshmallow'
 description = 'Marshmallow schemas for Django REST framework'
-url = 'https://github.com/tomchristie/django-rest-marshmallow'
+url = 'https://github.com/marshmallow-code/django-rest-marshmallow'
 author = 'Tom Christie'
 author_email = 'tom@tomchristie.com'
 maintainer = 'Steven Loria'

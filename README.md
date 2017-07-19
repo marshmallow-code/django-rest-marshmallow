@@ -1,6 +1,6 @@
 <div class="badges">
-    <a href="http://travis-ci.org/tomchristie/django-rest-marshmallow">
-        <img src="https://travis-ci.org/tomchristie/django-rest-marshmallow.svg?branch=master">
+    <a href="http://travis-ci.org/marshmallow-code/django-rest-marshmallow">
+        <img src="https://travis-ci.org/marshmallow-code/django-rest-marshmallow.svg?branch=master">
     </a>
     <a href="https://pypi.python.org/pypi/django-rest-marshmallow">
         <img src="https://img.shields.io/pypi/v/django-rest-marshmallow.svg">
@@ -9,7 +9,7 @@
 
 ---
 
-# [django-rest-marshmallow](http://tomchristie.github.io/django-rest-marshmallow)
+# [django-rest-marshmallow](https://marshmallow-code.github.io/django-rest-marshmallow/)
 
 [Marshmallow schemas][marshmallow] for Django REST framework.
 
@@ -21,7 +21,7 @@
 
 ## Requirements
 
-* Python (2.7, 3.3+)
+* Python (2.7, 3.4+)
 * Django REST framework (3.4+)
 * Marshmallow (2.0+)
 
@@ -39,60 +39,74 @@ $ pip install django-rest-marshmallow
 
 Define your schemas as you would with marshmallow, but importing the `Schema` class from `rest_marshmallow` instead.
 
-    from rest_marshmallow import Schema, fields
+```python
+from rest_marshmallow import Schema, fields
 
-    class CustomerSchema(Schema):
-        name = fields.String()
-        email = fields.Email()
-        created_at = fields.DateTime()
+class CustomerSchema(Schema):
+    name = fields.String()
+    email = fields.Email()
+    created_at = fields.DateTime()
+```
 
 The Schema class has the same interface as a Django REST framework serializer, so you can use it in your generic views...
 
-    class CustomerListView(generics.ListAPIView):
-        queryset = Customer.objects.all()
-        serializer_class = CustomerSchema
+```python
+class CustomerListView(generics.ListAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSchema
+```
 
 Or use the serializer API directly, for either serialization...
 
-    serializer = CustomerSchema(queryset, many=True)
-    return Response(serializer.data)
+```python
+serializer = CustomerSchema(queryset, many=True)
+return Response(serializer.data)
+```
 
 Or for validation...
 
-    serializer = CustomerSchema(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    serializer.validated_data
+```python
+serializer = CustomerSchema(data=request.data)
+serializer.is_valid(raise_exception=True)
+serializer.validated_data
+```
 
 #### Instance create and update
 
 If you want to support `serializer.save()` you'll need to define the `.create()` and/or `.update()` methods explicitly.
 
-    class CustomerSchema(Schema):
-        name = fields.String()
-        email = fields.Email()
-        created_at = fields.DateTime()
+```python
+class CustomerSchema(Schema):
+    name = fields.String()
+    email = fields.Email()
+    created_at = fields.DateTime()
 
-        def create(self, validated_data):
-            return Customer.objects.create(**validated_data)
+    def create(self, validated_data):
+        return Customer.objects.create(**validated_data)
 
-        def update(self, instance, validated_data):
-            for key, value in validated_data.items():
-                setattr(instance, key, value)
-            instance.save()
-            return instance
+    def update(self, instance, validated_data):
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+        return instance
+```
 
 You can now use `.save()` from your view code…
 
-    serializer = CustomerSchema(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    serializer.save()
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+```python
+serializer = CustomerSchema(data=request.data)
+serializer.is_valid(raise_exception=True)
+serializer.save()
+return Response(serializer.data, status=status.HTTP_201_CREATED)
+```
 
 Or use the schema together with generic views that create or update instances...
 
-    class CustomerListView(generics.ListCreateAPIView):
-        queryset = Customer.objects.all()
-        serializer_class = CustomerSchema
+```python
+class CustomerListView(generics.ListCreateAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSchema
+```
 
 Note that you should always use the `create()` and `update()` methods instead of overriding the `make_object()` marshmallow method.
 
@@ -100,22 +114,26 @@ Note that you should always use the `create()` and `update()` methods instead of
 
 For nested representations, use marshmallow's standard `Nested` field as usual.
 
-    from rest_marshmallow import fields, Schema
+```python
+from rest_marshmallow import fields, Schema
 
-    class ArtistSchema(Schema):
-        name = fields.String()
+class ArtistSchema(Schema):
+    name = fields.String()
 
-    class AlbumSchema(Schema):
-        title = fields.String()
-        release_date = fields.Date()
-        artist = fields.Nested(ArtistSchema)
+class AlbumSchema(Schema):
+    title = fields.String()
+    release_date = fields.Date()
+    artist = fields.Nested(ArtistSchema)
+```
 
 #### Excluding fields
 
 The marshmallow `only` and `exclude` arguments are also valid as serializer arguments:
 
-    serializer = CustomerSchema(queryset, many=True, only=('name', 'email'))
-    return Response(serializer.data)
+```python
+serializer = CustomerSchema(queryset, many=True, only=('name', 'email'))
+return Response(serializer.data)
+```
 
 ---
 

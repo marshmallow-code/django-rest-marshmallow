@@ -1,6 +1,6 @@
 <div class="badges">
-    <a href="http://travis-ci.org/tomchristie/django-rest-marshmallow">
-        <img src="https://travis-ci.org/tomchristie/django-rest-marshmallow.svg?branch=master">
+    <a href="http://travis-ci.org/marshmallow-code/django-rest-marshmallow">
+        <img src="https://travis-ci.org/marshmallow-code/django-rest-marshmallow.svg?branch=master">
     </a>
     <a href="https://pypi.python.org/pypi/django-rest-marshmallow">
         <img src="https://img.shields.io/pypi/v/django-rest-marshmallow.svg">
@@ -165,7 +165,7 @@ $ mkdocs build
 ### 3.0.0 (2017-05-29)
 
 * Officially support Python 3.6.
-* Fix error thrown when using a `Nested` field ([#12](https://github.com/tomchristie/django-rest-marshmallow/issues/12)). Thanks [@devashishsharma2302](https://github.com/devashishsharma2302) for the fix.
+* Fix error thrown when using a `Nested` field ([#12](https://github.com/marshmallow-code/django-rest-marshmallow/issues/12)). Thanks [@devashishsharma2302](https://github.com/devashishsharma2302) for the fix.
 * Drop support for Django<1.10 and DRF<3.4.
 
 ### 2.0.0 (2016-10-09)
@@ -176,7 +176,7 @@ $ mkdocs build
 
 ### 1.0.1 (2016-10-02)
 
-* Fix bug that raised a ``TypeError`` on serialization ([#6](https://github.com/tomchristie/django-rest-marshmallow/issues/6)).
+* Fix bug that raised a ``TypeError`` on serialization ([#6](https://github.com/marshmallow-code/django-rest-marshmallow/issues/6)).
 
 ### 1.0.0 (2015-09-11)
 
