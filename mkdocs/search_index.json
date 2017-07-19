@@ -1,0 +1,84 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "django-rest-marshmallow\n\n\nMarshmallow schemas\n for Django REST framework.\n\n\n\n\nOverview\n\n\ndjango-rest-marshmallow\n provides an alternative serializer implementation to the built-in serializers, by using the python \nmarshmallow\n library, but exposing the same API as REST framework's \nSerializer\n class.\n\n\nRequirements\n\n\n\n\nPython (2.7, 3.4+)\n\n\nDjango REST framework (3.4+)\n\n\nMarshmallow (2.0+)\n\n\n\n\nInstallation\n\n\nInstall using \npip\n...\n\n\n$ pip install django-rest-marshmallow\n\n\n\n\n\n\nUsage\n\n\nDefine your schemas as you would with marshmallow, but importing the \nSchema\n class from \nrest_marshmallow\n instead.\n\n\nfrom rest_marshmallow import Schema, fields\n\nclass CustomerSchema(Schema):\n    name = fields.String()\n    email = fields.Email()\n    created_at = fields.DateTime()\n\n\n\nThe Schema class has the same interface as a Django REST framework serializer, so you can use it in your generic views...\n\n\nclass CustomerListView(generics.ListAPIView):\n    queryset = Customer.objects.all()\n    serializer_class = CustomerSchema\n\n\n\nOr use the serializer API directly, for either serialization...\n\n\nserializer = CustomerSchema(queryset, many=True)\nreturn Response(serializer.data)\n\n\n\nOr for validation...\n\n\nserializer = CustomerSchema(data=request.data)\nserializer.is_valid(raise_exception=True)\nserializer.validated_data\n\n\n\nInstance create and update\n\n\nIf you want to support \nserializer.save()\n you'll need to define the \n.create()\n and/or \n.update()\n methods explicitly.\n\n\nclass CustomerSchema(Schema):\n    name = fields.String()\n    email = fields.Email()\n    created_at = fields.DateTime()\n\n    def create(self, validated_data):\n        return Customer.objects.create(**validated_data)\n\n    def update(self, instance, validated_data):\n        for key, value in validated_data.items():\n            setattr(instance, key, value)\n        instance.save()\n        return instance\n\n\n\nYou can now use \n.save()\n from your view code\u2026\n\n\nserializer = CustomerSchema(data=request.data)\nserializer.is_valid(raise_exception=True)\nserializer.save()\nreturn Response(serializer.data, status=status.HTTP_201_CREATED)\n\n\n\nOr use the schema together with generic views that create or update instances...\n\n\nclass CustomerListView(generics.ListCreateAPIView):\n    queryset = Customer.objects.all()\n    serializer_class = CustomerSchema\n\n\n\nNote that you should always use the \ncreate()\n and \nupdate()\n methods instead of overriding the \nmake_object()\n marshmallow method.\n\n\nNested representations\n\n\nFor nested representations, use marshmallow's standard \nNested\n field as usual.\n\n\nfrom rest_marshmallow import fields, Schema\n\nclass ArtistSchema(Schema):\n    name = fields.String()\n\nclass AlbumSchema(Schema):\n    title = fields.String()\n    release_date = fields.Date()\n    artist = fields.Nested(ArtistSchema)\n\n\n\nExcluding fields\n\n\nThe marshmallow \nonly\n and \nexclude\n arguments are also valid as serializer arguments:\n\n\nserializer = CustomerSchema(queryset, many=True, only=('name', 'email'))\nreturn Response(serializer.data)\n\n\n\n\n\nTesting\n\n\nInstall testing requirements.\n\n\n$ pip install -r requirements.txt\n\n\n\n\nRun with runtests.\n\n\n$ ./runtests.py\n\n\n\n\nYou can also use the excellent \ntox\n testing tool to run the tests against all supported versions of Python and Django. Install tox globally, and then simply run:\n\n\n$ tox\n\n\n\n\nDocumentation\n\n\nTo build the documentation, you'll need to install \nmkdocs\n.\n\n\n$ pip install mkdocs\n\n\n\n\nTo preview the documentation:\n\n\n$ mkdocs serve\nRunning at: http://127.0.0.1:8000/\n\n\n\n\nTo build the documentation:\n\n\n$ mkdocs build\n\n\n\n\nChangelog\n\n\n3.0.0 (2017-05-29)\n\n\n\n\nOfficially support Python 3.6.\n\n\nFix error thrown when using a \nNested\n field (\n#12\n). Thanks \n@devashishsharma2302\n for the fix.\n\n\nDrop support for Django<1.10 and DRF<3.4.\n\n\n\n\n2.0.0 (2016-10-09)\n\n\n\n\nDrop support for marshmallow 1.x. Only marshmallow>=2.0.0 is supported.\n\n\nOfficially support Python 3.4 and 3.5.\n\n\nDrop support for Python 3.3 (which is no longer supported by Django).\n\n\n\n\n1.0.1 (2016-10-02)\n\n\n\n\nFix bug that raised a \nTypeError\n on serialization (\n#6\n).\n\n\n\n\n1.0.0 (2015-09-11)\n\n\n\n\nFirst release.",
+            "title": "Home"
+        },
+        {
+            "location": "/#django-rest-marshmallow",
+            "text": "Marshmallow schemas  for Django REST framework.",
+            "title": "django-rest-marshmallow"
+        },
+        {
+            "location": "/#overview",
+            "text": "django-rest-marshmallow  provides an alternative serializer implementation to the built-in serializers, by using the python  marshmallow  library, but exposing the same API as REST framework's  Serializer  class.",
+            "title": "Overview"
+        },
+        {
+            "location": "/#requirements",
+            "text": "Python (2.7, 3.4+)  Django REST framework (3.4+)  Marshmallow (2.0+)",
+            "title": "Requirements"
+        },
+        {
+            "location": "/#installation",
+            "text": "Install using  pip ...  $ pip install django-rest-marshmallow",
+            "title": "Installation"
+        },
+        {
+            "location": "/#usage",
+            "text": "Define your schemas as you would with marshmallow, but importing the  Schema  class from  rest_marshmallow  instead.  from rest_marshmallow import Schema, fields\n\nclass CustomerSchema(Schema):\n    name = fields.String()\n    email = fields.Email()\n    created_at = fields.DateTime()  The Schema class has the same interface as a Django REST framework serializer, so you can use it in your generic views...  class CustomerListView(generics.ListAPIView):\n    queryset = Customer.objects.all()\n    serializer_class = CustomerSchema  Or use the serializer API directly, for either serialization...  serializer = CustomerSchema(queryset, many=True)\nreturn Response(serializer.data)  Or for validation...  serializer = CustomerSchema(data=request.data)\nserializer.is_valid(raise_exception=True)\nserializer.validated_data",
+            "title": "Usage"
+        },
+        {
+            "location": "/#instance-create-and-update",
+            "text": "If you want to support  serializer.save()  you'll need to define the  .create()  and/or  .update()  methods explicitly.  class CustomerSchema(Schema):\n    name = fields.String()\n    email = fields.Email()\n    created_at = fields.DateTime()\n\n    def create(self, validated_data):\n        return Customer.objects.create(**validated_data)\n\n    def update(self, instance, validated_data):\n        for key, value in validated_data.items():\n            setattr(instance, key, value)\n        instance.save()\n        return instance  You can now use  .save()  from your view code\u2026  serializer = CustomerSchema(data=request.data)\nserializer.is_valid(raise_exception=True)\nserializer.save()\nreturn Response(serializer.data, status=status.HTTP_201_CREATED)  Or use the schema together with generic views that create or update instances...  class CustomerListView(generics.ListCreateAPIView):\n    queryset = Customer.objects.all()\n    serializer_class = CustomerSchema  Note that you should always use the  create()  and  update()  methods instead of overriding the  make_object()  marshmallow method.",
+            "title": "Instance create and update"
+        },
+        {
+            "location": "/#nested-representations",
+            "text": "For nested representations, use marshmallow's standard  Nested  field as usual.  from rest_marshmallow import fields, Schema\n\nclass ArtistSchema(Schema):\n    name = fields.String()\n\nclass AlbumSchema(Schema):\n    title = fields.String()\n    release_date = fields.Date()\n    artist = fields.Nested(ArtistSchema)",
+            "title": "Nested representations"
+        },
+        {
+            "location": "/#excluding-fields",
+            "text": "The marshmallow  only  and  exclude  arguments are also valid as serializer arguments:  serializer = CustomerSchema(queryset, many=True, only=('name', 'email'))\nreturn Response(serializer.data)",
+            "title": "Excluding fields"
+        },
+        {
+            "location": "/#testing",
+            "text": "Install testing requirements.  $ pip install -r requirements.txt  Run with runtests.  $ ./runtests.py  You can also use the excellent  tox  testing tool to run the tests against all supported versions of Python and Django. Install tox globally, and then simply run:  $ tox",
+            "title": "Testing"
+        },
+        {
+            "location": "/#documentation",
+            "text": "To build the documentation, you'll need to install  mkdocs .  $ pip install mkdocs  To preview the documentation:  $ mkdocs serve\nRunning at: http://127.0.0.1:8000/  To build the documentation:  $ mkdocs build",
+            "title": "Documentation"
+        },
+        {
+            "location": "/#changelog",
+            "text": "",
+            "title": "Changelog"
+        },
+        {
+            "location": "/#300-2017-05-29",
+            "text": "Officially support Python 3.6.  Fix error thrown when using a  Nested  field ( #12 ). Thanks  @devashishsharma2302  for the fix.  Drop support for Django<1.10 and DRF<3.4.",
+            "title": "3.0.0 (2017-05-29)"
+        },
+        {
+            "location": "/#200-2016-10-09",
+            "text": "Drop support for marshmallow 1.x. Only marshmallow>=2.0.0 is supported.  Officially support Python 3.4 and 3.5.  Drop support for Python 3.3 (which is no longer supported by Django).",
+            "title": "2.0.0 (2016-10-09)"
+        },
+        {
+            "location": "/#101-2016-10-02",
+            "text": "Fix bug that raised a  TypeError  on serialization ( #6 ).",
+            "title": "1.0.1 (2016-10-02)"
+        },
+        {
+            "location": "/#100-2015-09-11",
+            "text": "First release.",
+            "title": "1.0.0 (2015-09-11)"
+        }
+    ]
+}
