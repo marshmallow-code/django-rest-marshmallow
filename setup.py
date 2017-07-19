@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import re
 import os
-import sys
 from setuptools import setup
 
 
@@ -52,21 +51,6 @@ def get_package_data(package):
 
 
 version = get_version(package)
-
-
-if sys.argv[-1] == 'publish':
-    try:
-        __import__('wheel')
-    except ImportError:
-        print("wheel not installed.\nUse `pip install wheel`.\nExiting.")
-        sys.exit(1)
-    os.system("python setup.py sdist upload")
-    os.system("python setup.py bdist_wheel upload")
-    print("You probably want to also tag the version now:")
-    print("  git tag -a {0} -m 'version {0}'".format(version))
-    print("  git push --tags")
-    sys.exit()
-
 
 setup(
     name=name,
