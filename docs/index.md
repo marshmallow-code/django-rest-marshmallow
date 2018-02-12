@@ -162,6 +162,10 @@ $ mkdocs build
 
 ## Changelog
 
+### 3.1.0 (2018-02-11)
+
+* Support marshmallow>=3.0.0b7. Thanks [@trnsnt](https://github.com/trnsnt).
+
 ### 3.0.0 (2017-05-29)
 
 * Officially support Python 3.6.
