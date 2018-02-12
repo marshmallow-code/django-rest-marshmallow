@@ -1,7 +1,12 @@
-from rest_framework.serializers import BaseSerializer, ValidationError
-
+import marshmallow
 from marshmallow import Schema as MarshmallowSchema
 from marshmallow import fields  # noqa
+from marshmallow.exceptions import ValidationError as MarshmallowValidationError
+from rest_framework.serializers import BaseSerializer, ValidationError
+
+
+IS_MARSHMALLOW_LT_3 = int(marshmallow.__version__.split('.')[0]) < 3
+
 
 __version__ = '3.0.0'
 
@@ -24,13 +29,20 @@ class Schema(BaseSerializer, MarshmallowSchema):
         MarshmallowSchema.__init__(self, **schema_kwargs)
 
     def to_representation(self, instance):
-        return self.dump(instance).data
+        if IS_MARSHMALLOW_LT_3:
+            return self.dump(instance).data
+        return self.dump(instance)
 
     def to_internal_value(self, data):
-        ret = self.load(data)
-        if ret.errors:
-            raise ValidationError(ret.errors)
-        return ret.data
+        if IS_MARSHMALLOW_LT_3:
+            ret = self.load(data)
+            if ret.errors:
+                raise ValidationError(ret.errors)
+            return ret.data
+        try:
+            return self.load(data)
+        except MarshmallowValidationError as err:
+            raise ValidationError(err.messages)
 
     @property
     def data(self):
