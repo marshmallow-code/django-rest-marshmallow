@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 import re
 import os
+from codecs import open
 from setuptools import setup
 
-
+here = os.path.abspath(os.path.dirname(__file__))
 name = 'django-rest-marshmallow'
 package = 'rest_marshmallow'
 description = 'Marshmallow schemas for Django REST framework'
@@ -52,6 +53,9 @@ def get_package_data(package):
 
 version = get_version(package)
 
+with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name=name,
     version=version,
@@ -65,6 +69,8 @@ setup(
     packages=get_packages(package),
     package_data=get_package_data(package),
     install_requires=[],
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
