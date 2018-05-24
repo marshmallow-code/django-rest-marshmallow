@@ -99,3 +99,9 @@ def test_update():
     assert instance.number == 456
     assert instance.text == 'def'
     assert serializer.data == {'number': 456, 'text': 'def'}
+
+
+def test_context_data():
+    instance = Object(number=123, text='abc')
+    serializer = ExampleSerializer(instance, context={'test': 'data'})
+    assert serializer.context == {'test': 'data'}
