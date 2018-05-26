@@ -162,6 +162,11 @@ $ mkdocs build
 
 ## Changelog
 
+### 3.1.1 (2018-05-24)
+
+* Support passing `context` argument ([#17](https://github.com/marshmallow-code/django-rest-marshmallow/issues/17)). Thanks [@pablotrinidad](https://github.com/pablotrinidad) for reporting
+ and thanks [@dhararon](https://github.com/dhararon) for the PR.
+
 ### 3.1.0 (2018-02-11)
 
 * Support marshmallow>=3.0.0b7. Thanks [@trnsnt](https://github.com/trnsnt).

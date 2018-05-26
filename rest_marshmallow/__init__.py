@@ -8,7 +8,7 @@ from rest_framework.serializers import BaseSerializer, ValidationError
 IS_MARSHMALLOW_LT_3 = int(marshmallow.__version__.split('.')[0]) < 3
 
 
-__version__ = '3.1.0'
+__version__ = '3.1.1'
 
 _schema_kwargs = (
     'only', 'exclude', 'dump_only', 'load_only', 'context'
