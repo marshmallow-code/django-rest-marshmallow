@@ -7,6 +7,7 @@ python:
   - "2.7"
 
 sudo: false
+cache: pip
 
 env:
   matrix:
@@ -22,11 +23,23 @@ install:
 script:
   - tox
 
-deploy:
-  provider: pypi
-  user: sloria
-  on:
-    tags: true
-  distributions: "sdist bdist_wheel"
-  password:
-    secure: ozRXU8oimoU9MxlC3eL/iEt8j3cZzO8HJcb4yutR6PAsPRvjAk6f0eqr+PhZbHU483uXImNsWDYYHFnlISFNtX14NiYcEoqSpLxp94Dslm/siqC+ZdSVjLAV7SE4NRJXIccM+FDKCvRqdUX1oVSaxL7mGr0B5BJEfHTEQj+R9ZG/wOD/6rSK9i1ZQqQx6Uu8TSQS/ErlLuSschlbiDUU6AUm5BZZEUg9E+XqfWwLHRfpAmzbhz3gnB/ef7kOu+qTtaOb3+F6eYg4fV2VDZIH8UyUc3gG4SA1lttDhJL3R4wU7+UgTEN2P4MAdGtCfdJfBkzbUt1X7apGsKAI7oH4WSQgHR1/Q7MyhN7eaN4YxH7x3HyaL/VL3phrXppVokEJSTiuZduRDdFRBe2zo4nxJl9+WsfsHbJUU/qWrSTUAjoQnQgt4cyDxyju06WD6T3uOuA5o884T/tXQuB7ECwmqwv5oowlwQ5mYlkQ3myJCZA5yp4wkksfNZEi7Ww/B6kbyFfiZpB+l717V7KLCTm3dvdA2uDU4KvPFvqvmRBcIFr33PlIL3YNVq/Bb2+rfgoMF+uT1t7sqa+c8bR3TEcrZBezd0GGAyUzQAajpwvWzt16AC87wbJKxe2UNJ02Ty48DmvBjR/+N1YDLvLAkF6Ayijn4iKL/GhGDuzh+UKwBeM=
+jobs:
+  include:
+  - stage: PyPI Release
+    if: tag IS present
+    python: "3.6"
+    env: []
+    # Override before_install, install, and script to no-ops
+    before_install: true
+    matrix: true
+    install: true
+    script: echo "Releasing to PyPI..."
+    after_success: true
+    deploy:
+      provider: pypi
+      user: sloria
+      on:
+        tags: true
+      distributions: "sdist bdist_wheel"
+      password:
+        secure: ozRXU8oimoU9MxlC3eL/iEt8j3cZzO8HJcb4yutR6PAsPRvjAk6f0eqr+PhZbHU483uXImNsWDYYHFnlISFNtX14NiYcEoqSpLxp94Dslm/siqC+ZdSVjLAV7SE4NRJXIccM+FDKCvRqdUX1oVSaxL7mGr0B5BJEfHTEQj+R9ZG/wOD/6rSK9i1ZQqQx6Uu8TSQS/ErlLuSschlbiDUU6AUm5BZZEUg9E+XqfWwLHRfpAmzbhz3gnB/ef7kOu+qTtaOb3+F6eYg4fV2VDZIH8UyUc3gG4SA1lttDhJL3R4wU7+UgTEN2P4MAdGtCfdJfBkzbUt1X7apGsKAI7oH4WSQgHR1/Q7MyhN7eaN4YxH7x3HyaL/VL3phrXppVokEJSTiuZduRDdFRBe2zo4nxJl9+WsfsHbJUU/qWrSTUAjoQnQgt4cyDxyju06WD6T3uOuA5o884T/tXQuB7ECwmqwv5oowlwQ5mYlkQ3myJCZA5yp4wkksfNZEi7Ww/B6kbyFfiZpB+l717V7KLCTm3dvdA2uDU4KvPFvqvmRBcIFr33PlIL3YNVq/Bb2+rfgoMF+uT1t7sqa+c8bR3TEcrZBezd0GGAyUzQAajpwvWzt16AC87wbJKxe2UNJ02Ty48DmvBjR/+N1YDLvLAkF6Ayijn4iKL/GhGDuzh+UKwBeM=
