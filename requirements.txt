@@ -1,6 +1,6 @@
 # Minimum Django and REST framework version
 Django==2.0.5
-djangorestframework==3.6.4
+djangorestframework==3.8.2
 marshmallow==2.15.3
 
 # Test requirements
