@@ -162,6 +162,12 @@ $ mkdocs build
 
 ## Changelog
 
+### 4.0.0 (unreleased)
+
+* Drop official support for Python 3.4. Only Python 2.7 and >= 3.5 are supported.
+* Officially support django-rest-framework>=3.6.
+* Officially support marshmallow>=2.15.3 and >=3.0.0b11.
+
 ### 3.1.1 (2018-05-24)
 
 * Support passing `context` argument ([#17](https://github.com/marshmallow-code/django-rest-marshmallow/issues/17)). Thanks [@pablotrinidad](https://github.com/pablotrinidad) for reporting

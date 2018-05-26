@@ -3,7 +3,6 @@ language: python
 python:
   - "3.6"
   - "3.5"
-  - "3.4"
   - "2.7"
 
 sudo: false
@@ -11,8 +10,8 @@ cache: pip
 
 env:
   matrix:
-    - DRF=3.4
     - DRF=3.6
+    - DRF=3.8
 
 matrix:
   fast_finish: true
