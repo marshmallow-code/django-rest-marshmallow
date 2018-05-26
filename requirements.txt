@@ -1,5 +1,5 @@
 # Minimum Django and REST framework version
-Django==1.11  # pyup: <2.0
+Django==1.11.13  # pyup: <2.0
 djangorestframework==3.6.4
 marshmallow==2.15.3  # pyup: <3.0
 
