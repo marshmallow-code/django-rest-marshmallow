@@ -18,6 +18,7 @@ matrix:
   fast_finish: true
 
 install:
+  - travis_retry pip install -U pip setuptools
   - travis_retry pip install -U virtualenv tox tox-travis
 
 script:
