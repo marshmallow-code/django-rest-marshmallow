@@ -1,16 +1,13 @@
 # Minimum Django and REST framework version
-Django==1.8.4
-djangorestframework==3.2.3
-marshmallow>=2.0.0
+Django==1.11
+djangorestframework==3.6.4
+marshmallow==2.15.3
 
 # Test requirements
 pytest-django==3.0.0
 pytest==3.0.3
 pytest-cov==2.3.1
 flake8==3.0.4
-
-# wheel for PyPI installs
-wheel==0.24.0
 
 # MkDocs for documentation
 mkdocs==0.15.3
