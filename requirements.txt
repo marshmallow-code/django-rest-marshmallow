@@ -1,6 +1,6 @@
 # Minimum Django and REST framework version
 Django==1.11.14  # pyup: <2.0
-djangorestframework==3.6.4  # pyup: >=3.6,<3.7
+djangorestframework==3.8.2  # pyup: >=3.6,<3.7
 marshmallow==2.15.3  # pyup: <3.0
 
 # Test requirements
