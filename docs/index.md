@@ -23,7 +23,7 @@
 
 * Python (2.7, 3.4+)
 * Django REST framework (3.4+)
-* Marshmallow (2.0+)
+* Marshmallow (2.0+, 3.0.0b18+)
 
 ## Installation
 
@@ -166,7 +166,7 @@ $ mkdocs build
 
 * Drop official support for Python 3.4. Only Python 2.7 and >= 3.5 are supported.
 * Officially support django-rest-framework>=3.6.
-* Officially support marshmallow>=2.15.3 and >=3.0.0b11.
+* Officially support marshmallow>=2.15.3 and >=3.0.0b18.
 
 ### 3.1.1 (2018-05-24)
 
