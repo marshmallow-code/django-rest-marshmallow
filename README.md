@@ -1,14 +1,14 @@
 <div class="badges">
     <a href="http://travis-ci.org/marshmallow-code/django-rest-marshmallow">
-        <img src="https://travis-ci.org/marshmallow-code/django-rest-marshmallow.svg?branch=master"
+        <img src="https://badgen.net/travis/marshmallow-code/django-rest-marshmallow/master"
         alt="Travis CI">
     </a>
     <a href="https://pypi.python.org/pypi/django-rest-marshmallow">
-        <img src="https://img.shields.io/pypi/v/django-rest-marshmallow.svg"
+        <img src="https://badgen.net/pypi/v/django-rest-marshmallow"
         alt="django-rest-marshmallow on PyPI">
     </a>
     <a href="https://marshmallow.readthedocs.io/en/latest/upgrading.html">
-        <img src="https://img.shields.io/badge/marshmallow-3-blue.svg"
+        <img src="https://badgen.net/badge/marshmallow/2,3?list=1"
         alt="marshmallow 3 compatible">
     </a>
 </div>
