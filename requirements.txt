@@ -4,7 +4,7 @@ djangorestframework>=3.6,<3.10
 marshmallow>=2.15.3,<3.0
 
 # Test requirements
-pytest-django==3.4.4
+pytest-django==3.4.5
 pytest==4.1.0
 pytest-cov==2.6.1
 flake8==3.6.0
