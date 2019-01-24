@@ -30,6 +30,11 @@ class NestedSerializer(Schema):
     child = fields.Nested(ExampleSerializer)
 
 
+class ManyNestedSerializer(Schema):
+    top = fields.Integer()
+    children = fields.Nested(ExampleSerializer, many=True)
+
+
 def test_serialize():
     instance = Object(number=123, text='abc')
     serializer = ExampleSerializer(instance)
@@ -50,6 +55,16 @@ def test_serialize_many():
         {'number': 123, 'text': 'abc'},
         {'number': 123, 'text': 'abc'},
     ]
+
+
+def test_serialize_nested_many():
+    instance = Object(top=1, children=[Object(number=123, text='abc') for i in range(3)])
+    serializer = ManyNestedSerializer(instance)
+    assert serializer.data == {'top': 1, 'children': [
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+    ]}
 
 
 def test_serialize_only():
