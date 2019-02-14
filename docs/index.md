@@ -167,6 +167,8 @@ $ mkdocs build
 * Drop official support for Python 3.4. Only Python 2.7 and >= 3.5 are supported.
 * Officially support django-rest-framework>=3.8.
 * Officially support marshmallow>=2.15.3 and >=3.0.0b18.
+* Fix behavior when passing `many=True` to a `Nested` field ([#72](https://github.com/marshmallow-code/django-rest-marshmallow/issues/72)). Thanks [@tyhoff](https://github.com/tyhoff)
+  for reporting and thanks [@droppoint](https://github.com/marshmallow-code/django-rest-marshmallow/pull/75) for the PR.
 
 ### 3.1.1 (2018-05-24)
 
