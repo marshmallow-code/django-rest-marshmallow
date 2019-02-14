@@ -16,6 +16,13 @@ _schema_kwargs = (
 
 
 class Schema(BaseSerializer, MarshmallowSchema):
+
+    def __new__(cls, *args, **kwargs):
+        # We're overriding the DRF implementation here, because ListSerializer
+        # clashes with Nested implementation.
+        kwargs.pop('many', False)
+        return super(Schema, cls).__new__(cls, *args, **kwargs)
+
     def __init__(self, *args, **kwargs):
         schema_kwargs = {
             'many': kwargs.get('many', False)
