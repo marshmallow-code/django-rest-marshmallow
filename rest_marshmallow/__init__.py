@@ -11,7 +11,7 @@ IS_MARSHMALLOW_LT_3 = int(marshmallow.__version__.split('.')[0]) < 3
 __version__ = '4.0.0'
 
 _schema_kwargs = (
-    'only', 'exclude', 'dump_only', 'load_only', 'context'
+    'only', 'exclude', 'dump_only', 'load_only', 'context', 'partial'
 )
 
 
