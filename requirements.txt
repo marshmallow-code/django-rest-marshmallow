@@ -5,7 +5,7 @@ marshmallow>=2.15.3,<4.0
 
 # Test requirements
 pytest-django==3.7.0
-pytest==5.3.1
+pytest==5.3.2
 pytest-cov==2.8.1
 flake8==3.7.9
 
