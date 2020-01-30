@@ -2,7 +2,8 @@ import marshmallow
 from marshmallow import Schema as MarshmallowSchema
 from marshmallow import fields  # noqa
 from marshmallow.exceptions import ValidationError as MarshmallowValidationError
-from rest_framework.serializers import BaseSerializer, ValidationError
+from rest_framework.serializers import BaseSerializer, ValidationError, ListSerializer
+from types import MethodType
 
 
 IS_MARSHMALLOW_LT_3 = int(marshmallow.__version__.split('.')[0]) < 3
@@ -15,13 +16,19 @@ _schema_kwargs = (
 )
 
 
+def _dump(self, obj, *args, many=None, **kwargs):
+    return [self.child.dump(o) for o in obj]
+
+
 class Schema(BaseSerializer, MarshmallowSchema):
 
     def __new__(cls, *args, **kwargs):
         # We're overriding the DRF implementation here, because ListSerializer
         # clashes with Nested implementation.
-        kwargs.pop('many', False)
-        return super(Schema, cls).__new__(cls, *args, **kwargs)
+        result = super(Schema, cls).__new__(cls, *args, **kwargs)
+        if isinstance(result, ListSerializer):
+            result.dump = MethodType(_dump, result)
+        return result
 
     def __init__(self, *args, **kwargs):
         schema_kwargs = {
