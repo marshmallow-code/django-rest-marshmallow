@@ -10,4 +10,4 @@ pytest-cov==2.8.1
 flake8==3.7.9
 
 # MkDocs for documentation
-mkdocs==1.0.4
+mkdocs==1.1
