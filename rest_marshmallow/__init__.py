@@ -33,6 +33,7 @@ class Schema(BaseSerializer, MarshmallowSchema):
                 schema_kwargs[key] = kwargs.pop(key)
 
         super(Schema, self).__init__(*args, **kwargs)
+        delattr(self, 'parent')
         MarshmallowSchema.__init__(self, **schema_kwargs)
 
     def to_representation(self, instance):
