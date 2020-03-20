@@ -162,7 +162,7 @@ $ mkdocs build
 
 ## Changelog
 
-### 4.0.2 (unreleased)
+### 4.0.2 (2020-03-19)
 
 * Fix serializing `Date` field 
 ([#110](https://github.com/marshmallow-code/django-rest-marshmallow/issues/110) and [#131](https://github.com/marshmallow-code/django-rest-marshmallow/issues/131)).
