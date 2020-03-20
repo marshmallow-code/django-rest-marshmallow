@@ -33,6 +33,8 @@ class Schema(BaseSerializer, MarshmallowSchema):
                 schema_kwargs[key] = kwargs.pop(key)
 
         super(Schema, self).__init__(*args, **kwargs)
+        # XXX: Remove parent attribute so that Field.root resolves properly
+        #  https://github.com/marshmallow-code/django-rest-marshmallow/issues/131#issuecomment-601089549
         delattr(self, 'parent')
         MarshmallowSchema.__init__(self, **schema_kwargs)
 
