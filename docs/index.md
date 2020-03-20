@@ -162,6 +162,12 @@ $ mkdocs build
 
 ## Changelog
 
+### 4.0.2 (unreleased)
+
+* Fix serializing `Date` field 
+([#110](https://github.com/marshmallow-code/django-rest-marshmallow/issues/110) and [#131](https://github.com/marshmallow-code/django-rest-marshmallow/issues/131)).
+Thanks [@michaelwiles](https://github.com/michaelwiles) for the fix.
+
 ### 4.0.1 (2019-07-30)
 
 * Allow passing `partial` to constructor ([#103](https://github.com/marshmallow-code/django-rest-marshmallow/issues/103)). 

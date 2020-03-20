@@ -1,3 +1,5 @@
+from datetime import date
+
 from rest_marshmallow import Schema, fields
 
 
@@ -15,6 +17,7 @@ class Object(object):
 class ExampleSerializer(Schema):
     number = fields.Integer()
     text = fields.String()
+    date = fields.Date()
 
     def create(self, validated_data):
         return Object(**validated_data)
@@ -68,7 +71,7 @@ def test_serialize_nested_many():
 
 
 def test_serialize_only():
-    instance = Object(number=123, text='abc')
+    instance = Object(number=123, text='abc', date=date.today())
     serializer = ExampleSerializer(instance, only=('text',))
     assert serializer.data == {'text': 'abc'}
 
