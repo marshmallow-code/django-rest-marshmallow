@@ -25,10 +25,6 @@ jobs:
     - stage: release
       if: tag IS present
       python: "3.6"
-      env: []
-      # Override install and script to no-ops
-      matrix: true
-      install: skip
       script: skip
       deploy:
         provider: pypi
