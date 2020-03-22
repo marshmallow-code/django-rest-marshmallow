@@ -6,37 +6,31 @@ python:
   - "2.7"
 
 cache: pip
-
-env:
-  matrix:
-    - DRF=3.8
-    - DRF=3.9
-
-matrix:
-  fast_finish: true
-
-install:
-  - travis_retry pip install -U pip setuptools
-  - travis_retry pip install -U virtualenv tox tox-travis
-
-script:
-  - tox
+script: skip
 
 jobs:
   include:
-  - stage: PyPI Release
-    if: tag IS present
-    python: "3.6"
-    env: []
-    # Override install and script to no-ops
-    matrix: true
-    install: skip
-    script: skip
-    deploy:
-      provider: pypi
-      user: sloria
-      on:
-        tags: true
-      distributions: "sdist bdist_wheel"
-      password:
-        secure: ozRXU8oimoU9MxlC3eL/iEt8j3cZzO8HJcb4yutR6PAsPRvjAk6f0eqr+PhZbHU483uXImNsWDYYHFnlISFNtX14NiYcEoqSpLxp94Dslm/siqC+ZdSVjLAV7SE4NRJXIccM+FDKCvRqdUX1oVSaxL7mGr0B5BJEfHTEQj+R9ZG/wOD/6rSK9i1ZQqQx6Uu8TSQS/ErlLuSschlbiDUU6AUm5BZZEUg9E+XqfWwLHRfpAmzbhz3gnB/ef7kOu+qTtaOb3+F6eYg4fV2VDZIH8UyUc3gG4SA1lttDhJL3R4wU7+UgTEN2P4MAdGtCfdJfBkzbUt1X7apGsKAI7oH4WSQgHR1/Q7MyhN7eaN4YxH7x3HyaL/VL3phrXppVokEJSTiuZduRDdFRBe2zo4nxJl9+WsfsHbJUU/qWrSTUAjoQnQgt4cyDxyju06WD6T3uOuA5o884T/tXQuB7ECwmqwv5oowlwQ5mYlkQ3myJCZA5yp4wkksfNZEi7Ww/B6kbyFfiZpB+l717V7KLCTm3dvdA2uDU4KvPFvqvmRBcIFr33PlIL3YNVq/Bb2+rfgoMF+uT1t7sqa+c8bR3TEcrZBezd0GGAyUzQAajpwvWzt16AC87wbJKxe2UNJ02Ty48DmvBjR/+N1YDLvLAkF6Ayijn4iKL/GhGDuzh+UKwBeM=
+    - stage: test
+      env:
+        matrix:
+          - DRF=3.8
+          - DRF=3.9
+        install:
+          - travis_retry pip install -U pip setuptools
+          - travis_retry pip install -U virtualenv tox tox-travis
+
+        script:
+          - tox
+
+    - stage: release
+      if: tag IS present
+      python: "3.6"
+      script: skip
+      deploy:
+        provider: pypi
+        user: sloria
+        on:
+          tags: true
+        distributions: "sdist bdist_wheel"
+        password:
+          secure: ozRXU8oimoU9MxlC3eL/iEt8j3cZzO8HJcb4yutR6PAsPRvjAk6f0eqr+PhZbHU483uXImNsWDYYHFnlISFNtX14NiYcEoqSpLxp94Dslm/siqC+ZdSVjLAV7SE4NRJXIccM+FDKCvRqdUX1oVSaxL7mGr0B5BJEfHTEQj+R9ZG/wOD/6rSK9i1ZQqQx6Uu8TSQS/ErlLuSschlbiDUU6AUm5BZZEUg9E+XqfWwLHRfpAmzbhz3gnB/ef7kOu+qTtaOb3+F6eYg4fV2VDZIH8UyUc3gG4SA1lttDhJL3R4wU7+UgTEN2P4MAdGtCfdJfBkzbUt1X7apGsKAI7oH4WSQgHR1/Q7MyhN7eaN4YxH7x3HyaL/VL3phrXppVokEJSTiuZduRDdFRBe2zo4nxJl9+WsfsHbJUU/qWrSTUAjoQnQgt4cyDxyju06WD6T3uOuA5o884T/tXQuB7ECwmqwv5oowlwQ5mYlkQ3myJCZA5yp4wkksfNZEi7Ww/B6kbyFfiZpB+l717V7KLCTm3dvdA2uDU4KvPFvqvmRBcIFr33PlIL3YNVq/Bb2+rfgoMF+uT1t7sqa+c8bR3TEcrZBezd0GGAyUzQAajpwvWzt16AC87wbJKxe2UNJ02Ty48DmvBjR/+N1YDLvLAkF6Ayijn4iKL/GhGDuzh+UKwBeM=
