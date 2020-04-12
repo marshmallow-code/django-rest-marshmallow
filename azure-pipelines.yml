@@ -18,11 +18,49 @@ resources:
       name: sloria/azure-pipeline-templates
       ref: refs/heads/sloria
 
+# Run jobs with tox for lint/docs only
 jobs:
+- job: direct_pytest
+  # Make strategy and vm 
+  pool:
+    vmImage: 'ubuntu-latest'
+  strategy:
+    matrix:
+      Python35:
+        python.version: '3.5'
+      Python36:
+        python.version: '3.6'
+      Python37:
+        python.version: '3.7'
+      Python38:
+        python.version: '3.8'
+  # Run steps for working and simple `pytest` call
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
+  - script: |
+      pip install pytest pytest-azurepipelines
+      pytest
+    displayName: 'pytest'
 - template: job--python-tox.yml@sloria
   parameters:
-    toxenvs: [lint, py35, py36, py37, py38, docs]
+    toxenvs: [lint, docs] # Skip py35 etc here
     os: linux
+    buildSteps:
+      - script: python -m pip install --upgrade pip
+        displayName: 'Upgrade pip'
+      - script: pip install -r requirements.txt
+        displayName: 'Install pip dependencies'
+# - template: job--python-tox.yml@sloria
+#   parameters:
+#     toxenvs: [lint, docs] # Skip py35 etc here
+#     os: linux
 - template: job--pypi-release.yml@sloria
   parameters:
     dependsOn:
