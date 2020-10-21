@@ -21,9 +21,9 @@
 
 ## Requirements
 
-* Python (2.7, 3.4+)
-* Django REST framework (3.4+)
-* Marshmallow (2.0+, 3.0.0b18+)
+* Python (3.6+)
+* Django REST framework (3.8+)
+* Marshmallow (3.0.0+)
 
 ## Installation
 
@@ -162,15 +162,20 @@ $ mkdocs build
 
 ## Changelog
 
+### 5.0.0 (unreleased)
+
+* Drop support for Python 2 and marshmallow 2.
+  Only Python>=3.6 and marshmallow>=3 are supported.
+
 ### 4.0.2 (2020-03-19)
 
-* Fix serializing `Date` field 
+* Fix serializing `Date` field
 ([#110](https://github.com/marshmallow-code/django-rest-marshmallow/issues/110) and [#131](https://github.com/marshmallow-code/django-rest-marshmallow/issues/131)).
 Thanks [@michaelwiles](https://github.com/michaelwiles) for the fix.
 
 ### 4.0.1 (2019-07-30)
 
-* Allow passing `partial` to constructor ([#103](https://github.com/marshmallow-code/django-rest-marshmallow/issues/103)). 
+* Allow passing `partial` to constructor ([#103](https://github.com/marshmallow-code/django-rest-marshmallow/issues/103)).
   Thanks [@davidzwa](https://github.com/davidzwa) for the catch and patch.
 
 ### 4.0.0 (2019-02-14)
