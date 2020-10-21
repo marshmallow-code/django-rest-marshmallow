@@ -1,9 +1,9 @@
 language: python
 
 python:
+  - "3.8"
+  - "3.7"
   - "3.6"
-  - "3.5"
-  - "2.7"
 
 cache: pip
 script: skip
@@ -24,7 +24,7 @@ jobs:
 
     - stage: release
       if: tag IS present
-      python: "3.6"
+      python: "3.8"
       script: skip
       deploy:
         provider: pypi
