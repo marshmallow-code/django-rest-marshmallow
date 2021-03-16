@@ -7,7 +7,7 @@ marshmallow>=3.0,<4.0
 pytest
 pytest-django==3.8.0
 pytest-cov==2.11.1
-flake8==3.8.4
+flake8==3.9.0
 
 # MkDocs for documentation
 mkdocs
