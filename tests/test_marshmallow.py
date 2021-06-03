@@ -83,6 +83,21 @@ def test_deserialize():
     assert serializer.validated_data == {'number': 123, 'text': 'abc'}
 
 
+def test_deserialize_many():
+    data = [
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+    ]
+    serializer = ExampleSerializer(data=data, many=True)
+    assert serializer.is_valid()
+    assert serializer.validated_data == [
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+    ]
+
+
 def test_deserialize_validation_failed():
     data = {'number': 'abc', 'text': 'abc'}
     serializer = ExampleSerializer(data=data)
@@ -106,6 +121,27 @@ def test_create():
     assert instance.number == 123
     assert instance.text == 'abc'
     assert serializer.data == {'number': 123, 'text': 'abc'}
+
+
+def test_create_many():
+    data = [
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+    ]
+    serializer = ExampleSerializer(data=data, many=True)
+    assert serializer.is_valid()
+    instances = serializer.save()
+    assert instances
+    for instance in instances:
+        assert isinstance(instance, Object)
+        assert instance.number == 123
+        assert instance.text == 'abc'
+    assert serializer.data == [
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+        {'number': 123, 'text': 'abc'},
+    ]
 
 
 def test_update():
